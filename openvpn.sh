@@ -48,8 +48,8 @@ firewall() {
     iptables -A OUTPUT -p udp -m udp --dport 53 -j ACCEPT
     iptables -A OUTPUT -p tcp -m owner --gid-owner vpn -j ACCEPT 2>/dev/null &&
     iptables -A OUTPUT -p udp -m owner --gid-owner vpn -j ACCEPT || {
-        iptables -A OUTPUT -p tcp -m tcp --dport 1194 -j ACCEPT
-        iptables -A OUTPUT -p udp -m udp --dport 1194 -j ACCEPT; }
+    iptables -A OUTPUT -p tcp -m tcp --dport ${OVPN_PORT:-1194} -j ACCEPT
+    iptables -A OUTPUT -p udp -m udp --dport ${OVPN_PORT:-1194} -j ACCEPT; }
     iptables -A OUTPUT -j DROP
 }
 
